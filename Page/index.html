@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div id="mainPage">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">UP HP Report</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="indexM.html" id="rePort">รายงาน</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#" id="pushUser">เพิ่มผู้ใช้</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">รายงาน</a>
+                        </li>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                บัญชี
+                            </a>
+                            <ul class="dropdown-menu p-3 " id="loginForm">
+                                <div id="formid">
+                                    <li class="nav-item">
+                                        <p id="nameshow"></p>
+                                        <p id="roomshow"></p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" aria-current="page" href="#">ประวัติ</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" aria-current="page" href="#">แก้ไข</a>
+                                    </li>
+                                    <button class="btn btn-primary" onclick="logOut()">Logout</button>
+                                </div>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <br>
+        <form id="contactForm">
+            <div class="container">
+                <h1>แจ้งซ่อม</h1>
+                <br>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupSelect01">ปัญหาจาก</label>
+                    <select class="form-select" id="inputG" required>
+                        <option value="" selected="selected">เลือกปัญหา</option>
+                        <option value="computer">คอมพิวเตอร์</option>
+                        <option value="printer">ปริ้นเตอร์</option>
+                        <option value="program">โปรแกรม</option>
+                        <option value="other">อื่นๆ</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">รายละเอียด</span>
+                    <textarea class="form-control" aria-label="With textarea" id="diScrip" required></textarea>
+                </div>
+                <br>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit" id="submitButton">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="formlogin">
+        <div class="container ">
+            <br>
+            <h1>Up Hp Report</h1>
+            <br>
+            <div class="mb-3">
+                <label for="exampleDropdownFormEmail2" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="Email">
+            </div>
+            <div class="mb-3">
+                <label for="exampleDropdownFormPassword2" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="dropdownCheck2">
+                    <label class="form-check-label" for="dropdownCheck2">
+                        Remember me
+                    </label>
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="login()">Sign in</button>
+        </div>
+    </div>
+    <br>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="/test3/js/index.js"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+</script>
+
+
+</html>
