@@ -105,10 +105,13 @@ database.once('value', function(snapshot){
             content += '<td>' + Descr + '</td>'; //column1
             content += '<td>' + Names + '</td>';//column2
             content += '<td>' + Rooms + '</td>';
-            
+            content += '<td>' + '<button>รับงาน</button>' + '</td>';
             content += '</tr>';
+            document.getElementById("Descr").innerHTML = Descr;
+                                                                               
         });
         //console.log(idaaa);
         document.getElementById("ex-table").innerHTML = content;
+        
     }
 });
