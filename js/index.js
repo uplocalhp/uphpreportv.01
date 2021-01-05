@@ -15,8 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 var messagesRef = firebase.database().ref('messages');
 
-// รับค่าจาก form contactForm
-document.getElementById('contactForm').addEventListener('submit', submitForm);
+
 
 
 function getInputVal(id) {
@@ -24,14 +23,14 @@ function getInputVal(id) {
 }
 
 // บันทึกข้อมูลลง firebase
-function saveMessage(problem, diScrip,y1,y2) {
+function saveMessage(problem, diScrip,name,room) {
     var newMessageRef = messagesRef.push();
     newMessageRef.set({
         Problem: problem,
         Discrip: diScrip,
-        Name:y1,
-        Room:y2,
-        Cid:x+1
+        Name:name,
+        Room:room,
+        
         
     });
     eraseText();
@@ -42,10 +41,9 @@ function saveMessage(problem, diScrip,y1,y2) {
 
 var db = firebase.firestore();
 
-// wait
-function waitPage() {
-    
-}
+
+// รับค่าจาก form contactForm
+document.getElementById('contactForm').addEventListener('submit', submitForm);
 
 //ดึงค่าจาก id 
 function login() {
@@ -135,11 +133,11 @@ function submitForm(e) {
     // รับค่าจาก html
     var problem = getInputVal('inputG');
     var diScrip = getInputVal('diScrip');
-    var y1 = y["name"];
-    var y2 = y["room"];
-    console.log ("y1 ="+y1);
-    console.log ("y2 ="+y2);
-    saveMessage(problem, diScrip,y1,y2);
+    var name = y["name"];
+    var room = y["room"];
+    console.log ("name ="+name);
+    console.log ("room ="+room);
+    saveMessage(problem, diScrip,name,room);
 
 }
 function eraseText() {

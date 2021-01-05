@@ -1,12 +1,3 @@
-// function acceptjob(targetname,targettype) {
-//     if (targettype == "admin"){
-//         //รับงาน
-//     }
-//     else if (targettype == "user"){
-//         //popup
-//     }
-// }
-
 var firebaseConfig = {
     apiKey: "AIzaSyAqLNgR7JUA4TAshJkgfI93vO1SzYiqTfU",
     authDomain: "uphpreport-3d36f.firebaseapp.com",
@@ -21,12 +12,6 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// cloud firestore
-// Initialize Cloud Firestore through Firebase
-
-var db = firebase.firestore();
-var IDaaa ;
-
 // logout
 
 function logOut() {
@@ -37,6 +22,8 @@ function logOut() {
         window.alert("error :" + error);
     });
 }
+
+var db = firebase.firestore();
 
 // แสดง login logout
 firebase.auth().onAuthStateChanged((user) => {
@@ -52,7 +39,7 @@ firebase.auth().onAuthStateChanged((user) => {
         console.log(uid);
         //เอา uemail ไปเช็ค ใน cloud firestore
         // ...
-        
+
 
         db.collection("user").where("email", "==", uemail).get().then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
@@ -67,16 +54,16 @@ firebase.auth().onAuthStateChanged((user) => {
                     // ส่งค่าไปแสดงที่ html id = nameshow
                     document.getElementById("nameshow").innerHTML = "คุณ : " + targetname;
                     document.getElementById("roomshow").innerHTML = "ห้อง : " + targetroom;
-                    y = x  ;
+                    y = x;
                 });
             })
             .catch(function (error) {
                 console.log("Error getting documents: ", error);
             });
 
-        
-        
-        
+
+
+
     } else {
         // User is signed out
         // ...
@@ -87,34 +74,54 @@ firebase.auth().onAuthStateChanged((user) => {
         location.href = "index.html";
     }
 });
-var database = firebase.database().ref().child('messages');
-database.once('value', function(snapshot){
-    if(snapshot.exists()){
-        var content = '';
 
-        snapshot.forEach(function(data){
-            var Descr = data.val().Discrip;
-            var Names= data.val().Name;
-            var Rooms = data.val().Room;
-            var pt = data.val().Problem;
-            //idaaa = data.val().Cid;
-            
-          
-            content += '<tr>';
-            content += '<td>' + pt + '</td>';
-            content += '<td>' + Descr + '</td>'; //column1
-            content += '<td>' + Names + '</td>';//column2
-            content += '<td>' + Rooms + '</td>';
-            content += '<td>' + '<button onclick ="succ()">รับงาน</button>' + '</td>';
-            content += '</tr>';
-            document.getElementById("Descr").innerHTML = Descr;
-            function succ() {
-                
-            }
-                                                                               
-        });
-        //console.log(idaaa);
-        document.getElementById("ex-table").innerHTML = content;
-        
-    }
-});
+
+// รับค่าจาก form contactForm
+document.getElementById('formSingup').addEventListener('submit', Singup);
+
+//ดึงค่าจาก id 
+function Singup(e) {
+    e.preventDefault();
+    
+    var emailGet = document.getElementById('inputemail').value;
+    var passwordGet = document.getElementById('inputpass').value;
+    var passwordGet2 = document.getElementById('inputpass2').value;
+    var nameGet = document.getElementById('inputname').value;
+    var roomGet = document.getElementById('inputRoom').value;
+
+    console.log(emailGet);
+    console.log(passwordGet);
+
+        firebase.auth().createUserWithEmailAndPassword(emailGet, passwordGet)
+            .then((user) => {
+                // Signed in 
+                firebase.auth().signOut().then(function () {
+                    // Sign-out successful.
+                }).catch(function (error) {
+                    // An error happened.
+                    window.alert("error :" + error);
+                });
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ..
+            });
+
+        // Add a new document in collection "cities"
+        db.collection("user").add({
+                email: emailGet,
+                name: nameGet,
+                room: roomGet,
+                type: "user"
+            })
+            .then(function () {
+                console.log("Document successfully written!");
+            })
+            .catch(function (error) {
+                console.error("Error writing document: ", error);
+            });
+
+    
+
+}
